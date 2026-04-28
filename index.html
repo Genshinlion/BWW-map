@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MP + Buffalo Wild Wings Map</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+</head>
+<body>
+    <div id="top">
+        <h1>MP + Buffalo Wild Wings Map</h1>
+        <small><i class="fas fa-building" style="color:#1e3a8a"></i> = Buildings to purchase · <i class="fas fa-utensils" style="color:#dc2626"></i> = PA Restaurants · <i class="fas fa-utensils" style="color:#c2410c"></i> = NJ Restaurants · <i class="fas fa-star" style="color:#c2410c"></i> = GO Services · Radius + driving distance tools included</small>
+    </div>
+    <div id="wrap">
+        <div id="panel">
+            <div class="row legend">
+                <b>Legend</b><br>
+                <i class="fas fa-building" style="color:#1e3a8a"></i> MP locations (buildings to purchase)<br>
+                <i class="fas fa-utensils" style="color:#dc2626"></i> PA Buffalo Wild Wings (restaurants)<br>
+                <i class="fas fa-utensils" style="color:#c2410c"></i> NJ Buffalo Wild Wings (restaurants)<br>
+                <i class="fas fa-star" style="color:#c2410c"></i> GO service locations
+            </div>
+            <div class="row">
+                <b>Radius tool</b>
+                <p class="hint">Pick a location and enter radius miles.</p>
+                <label>Center point</label>
+                <select id="radiusCenter"></select>
+                <label>Radius miles</label>
+                <input id="radiusMiles" type="number" value="10" step="0.5">
+                <button onclick="drawRadius()">Draw / update radius</button>
+                <button class="secondary" onclick="clearRadius()">Clear radius</button>
+            </div>
+            <div class="row">
+                <b>Drive distance + time</b>
+                <p class="hint">Select any MP or BWW as start/end. This uses OSRM public routing; if offline, it shows straight-line distance only.</p>
+                <label>Start</label>
+                <select id="from"></select>
+                <label>End</label>
+                <select id="to"></select>
+                <button onclick="routeDrive()">Calculate drive</button>
+                <button class="secondary" onclick="clearRoute()">Clear route</button>
+                <div id="routeResult" class="result">No route calculated yet.</div>
+            </div>
+            <div class="row">
+                <b>Pin counts</b>
+                <div id="counts" class="hint"></div>
+            </div>
+            <div class="row">
+                <b>Optional coordinate cleanup</b>
+                <p class="hint">Some BWW coordinates are approximate from your table screenshots. Click this to try geocoding addresses in your browser via OpenStreetMap/Nominatim, then the pins will move closer to the official address.</p>
+                <button class="secondary" onclick="geocodeBWW()">Refresh BWW coordinates from addresses</button>
+                <div id="geoStatus" class="hint"></div>
+            </div>
+        </div>
+        <div id="map"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
