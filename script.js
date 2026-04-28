@@ -360,3 +360,50 @@ async function geocodeBWW() {
 // Initialize the map with markers and selects
 addMarkers();
 fillSelects();
+
+// Autocomplete for address input
+const geocoder = L.Control.Geocoder.nominatim();
+const startAddressInput = document.getElementById('startAddress');
+const suggestionsDiv = document.getElementById('addressSuggestions');
+let debounceTimer;
+
+startAddressInput.addEventListener('input', function() {
+    clearTimeout(debounceTimer);
+    const query = this.value.trim();
+    if (query.length < 3) {
+        suggestionsDiv.style.display = 'none';
+        return;
+    }
+    debounceTimer = setTimeout(() => {
+        geocoder.geocode(query, (results) => {
+            suggestionsDiv.innerHTML = '';
+            if (results && results.length > 0) {
+                results.slice(0, 5).forEach((result) => {
+                    const div = document.createElement('div');
+                    div.textContent = result.name;
+                    div.addEventListener('click', () => {
+                        startAddressInput.value = result.name;
+                        suggestionsDiv.style.display = 'none';
+                    });
+                    suggestionsDiv.appendChild(div);
+                });
+                suggestionsDiv.style.display = 'block';
+            } else {
+                suggestionsDiv.style.display = 'none';
+            }
+        });
+    }, 300);
+});
+
+startAddressInput.addEventListener('blur', () => {
+    // Delay hiding to allow click on suggestion
+    setTimeout(() => {
+        suggestionsDiv.style.display = 'none';
+    }, 150);
+});
+
+startAddressInput.addEventListener('focus', function() {
+    if (this.value.trim().length >= 3 && suggestionsDiv.children.length > 0) {
+        suggestionsDiv.style.display = 'block';
+    }
+});
