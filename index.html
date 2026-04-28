@@ -6,6 +6,7 @@
     <title>MP + Buffalo Wild Wings Map</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 </head>
@@ -18,7 +19,7 @@
         <div id="panel">
             <div class="row legend">
                 <b>Legend</b><br>
-                <i class="fas fa-building" style="color:#1e3a8a"></i> MP locations (buildings to purchase)<br>
+                <i class="fas fa-building" style="color:#1e3a8a"></i> MP locations (buildings to oversee)<br>
                 <i class="fas fa-utensils" style="color:#dc2626"></i> PA Buffalo Wild Wings (restaurants)<br>
                 <i class="fas fa-utensils" style="color:#c2410c"></i> NJ Buffalo Wild Wings (restaurants)<br>
                 <i class="fas fa-star" style="color:#c2410c"></i> GO service locations
@@ -30,7 +31,7 @@
                 <select id="radiusCenter"></select>
                 <label>Radius miles</label>
                 <input id="radiusMiles" type="number" value="10" step="0.5">
-                <button onclick="drawRadius()">Draw / update radius</button>
+                <button class="primary" onclick="drawRadius()">Draw / update radius</button>
                 <button class="secondary" onclick="clearRadius()">Clear radius</button>
             </div>
             <div class="row">
@@ -40,7 +41,7 @@
                 <select id="from"></select>
                 <label>End</label>
                 <select id="to"></select>
-                <button onclick="routeDrive()">Calculate drive</button>
+                <button class="primary" onclick="routeDrive()">Calculate drive</button>
                 <button class="secondary" onclick="clearRoute()">Clear route</button>
                 <div id="routeResult" class="result">No route calculated yet.</div>
             </div>
@@ -51,7 +52,7 @@
                 <input id="startAddress" type="text" placeholder="1914 Foster Street, ...">
                 <label>Destination</label>
                 <select id="addressTarget"></select>
-                <button onclick="routeAddress()">Route from address</button>
+                <button class="primary" onclick="routeAddress()">Route from address</button>
                 <button class="secondary" onclick="clearRoute()">Clear route</button>
                 <div id="addressRouteResult" class="result">No address route calculated yet.</div>
             </div>
