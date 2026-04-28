@@ -153,6 +153,15 @@ function fillSelects() {
         toSelect.appendChild(option);
     });
 
+    const addressTarget = document.getElementById('addressTarget');
+    addressTarget.innerHTML = '';
+    ALL.forEach((p, i) => {
+        const option = document.createElement('option');
+        option.value = i;
+        option.textContent = `${p.type} - ${p.id || p.name}`;
+        addressTarget.appendChild(option);
+    });
+
     radiusSelect.innerHTML = '';
     ALL.forEach((p, i) => {
         const option = document.createElement('option');
@@ -203,6 +212,10 @@ function clearRoute() {
         routeLine = null;
     }
     document.getElementById('routeResult').textContent = 'No route calculated yet.';
+    const addressOut = document.getElementById('addressRouteResult');
+    if (addressOut) {
+        addressOut.textContent = 'No address route calculated yet.';
+    }
 }
 
 // Function to calculate straight-line distance using Haversine formula
@@ -214,6 +227,64 @@ function haversine(a, b) {
     const lat2 = b.lat * Math.PI / 180;
     const x = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon / 2) ** 2;
     return 2 * R * Math.asin(Math.sqrt(x));
+}
+
+// Function to geocode a single user address using Nominatim
+async function geocodeAddress(address) {
+    const q = encodeURIComponent(address);
+    const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${q}`;
+    const r = await fetch(url, { headers: { 'Accept': 'application/json' } });
+    const d = await r.json();
+    if (d && d[0]) {
+        return { lat: parseFloat(d[0].lat), lng: parseFloat(d[0].lon) };
+    }
+    return null;
+}
+
+// Route from a typed address to a selected location
+async function routeAddress() {
+    clearRoute();
+    const address = document.getElementById('startAddress').value.trim();
+    const target = ALL[+document.getElementById('addressTarget').value];
+    const out = document.getElementById('addressRouteResult');
+
+    if (!address) {
+        out.textContent = 'Please enter a start address.';
+        return;
+    }
+
+    out.textContent = 'Geocoding address...';
+    const start = await geocodeAddress(address);
+    if (!start) {
+        out.textContent = 'Address not found. Please try a different address.';
+        return;
+    }
+
+    const straight = haversine(start, target);
+    out.innerHTML = 'Routing...';
+
+    try {
+        const url = `https://router.project-osrm.org/route/v1/driving/${start.lng},${start.lat};${target.lng},${target.lat}?overview=full&geometries=geojson`;
+        const r = await fetch(url);
+        if (!r.ok) throw new Error('route failed');
+        const data = await r.json();
+        const rt = data.routes[0];
+        const mi = rt.distance / 1609.344;
+        const min = rt.duration / 60;
+
+        routeLine = L.geoJSON(rt.geometry, { style: { color: '#111827', weight: 4 } }).addTo(map);
+        map.fitBounds(routeLine.getBounds(), { padding: [30, 30] });
+
+        out.innerHTML = `<b>Driving:</b> ${mi.toFixed(1)} miles · ${Math.round(min)} minutes<br><b>Straight-line:</b> ${straight.toFixed(1)} miles`;
+    } catch (e) {
+        routeLine = L.polyline([[start.lat, start.lng], [target.lat, target.lng]], {
+            color: '#111827',
+            dashArray: '6,6',
+            weight: 3
+        }).addTo(map);
+        map.fitBounds(routeLine.getBounds(), { padding: [30, 30] });
+        out.innerHTML = `Routing service unavailable.<br><b>Straight-line distance:</b> ${straight.toFixed(1)} miles`;
+    }
 }
 
 // Function to calculate driving route using OSRM

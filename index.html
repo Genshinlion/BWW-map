@@ -35,7 +35,7 @@
             </div>
             <div class="row">
                 <b>Drive distance + time</b>
-                <p class="hint">Select any MP or BWW as start/end. This uses OSRM public routing; if offline, it shows straight-line distance only.</p>
+                <p class="hint">Select any MP as the start and any BWW as the end. This uses OSRM public routing; if offline, it shows straight-line distance only.</p>
                 <label>Start</label>
                 <select id="from"></select>
                 <label>End</label>
@@ -43,6 +43,17 @@
                 <button onclick="routeDrive()">Calculate drive</button>
                 <button class="secondary" onclick="clearRoute()">Clear route</button>
                 <div id="routeResult" class="result">No route calculated yet.</div>
+            </div>
+            <div class="row">
+                <b>Address to location</b>
+                <p class="hint">Enter any start address and route to one of the MP or BWW locations.</p>
+                <label>Start address</label>
+                <input id="startAddress" type="text" placeholder="1914 Foster Street, ...">
+                <label>Destination</label>
+                <select id="addressTarget"></select>
+                <button onclick="routeAddress()">Route from address</button>
+                <button class="secondary" onclick="clearRoute()">Clear route</button>
+                <div id="addressRouteResult" class="result">No address route calculated yet.</div>
             </div>
             <div class="row">
                 <b>Pin counts</b>
