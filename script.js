@@ -8,7 +8,7 @@ const MP = [
     {"id": "MP 90577", "lat": 40.0873896110275, "lng": -74.9608339748005},
     {"id": "MP 91122", "lat": 40.2129635176821, "lng": -75.01195462589},
     {"id": "MP 94750", "lat": 39.9763606531953, "lng": -75.1194692650701},
-    {"id": "MP 20693", "lat": 39.976494932146, "lng": -75.1580816265739},
+    {"id": "MP 20693", "lat": 39.976494932146,  "lng": -75.1580816265739},
     {"id": "MP 90582", "lat": 40.2322636001077, "lng": -74.9407894586644},
     {"id": "MP 21521", "lat": 39.9539052600824, "lng": -75.199227479263},
     {"id": "MP 21518", "lat": 39.9379431591009, "lng": -75.1667540382082},
@@ -16,7 +16,7 @@ const MP = [
     {"id": "MP 20674", "lat": 40.0306914380818, "lng": -75.1034135383946},
     {"id": "MP 95024", "lat": 40.2459747070055, "lng": -74.7630541149707},
     {"id": "MP 20682", "lat": 40.2110783778632, "lng": -74.7552723000323},
-    {"id": "MP 20697", "lat": 40.556294071305, "lng": -75.4896127978639},
+    {"id": "MP 20697", "lat": 40.556294071305,  "lng": -75.4896127978639},
     {"id": "MP 90560", "lat": 40.6748387513354, "lng": -75.3460137037353},
     {"id": "MP 21406", "lat": 40.5524942874463, "lng": -75.5923687183309},
     {"id": "MP 90522", "lat": 41.2584381158992, "lng": -75.901857032505},
@@ -59,6 +59,10 @@ const ALL = [
     ...BWW_PA.map(x => ({ ...x, type: 'BWW PA', color: '#dc2626' })),
     ...BWW_NJ.map(x => ({ ...x, type: 'BWW NJ', color: '#c2410c' }))
 ];
+
+// Separate arrays for MP and BWW selections
+const ALL_MP = ALL.filter(p => p.type === 'MP');
+const ALL_BWW = ALL.filter(p => p.type !== 'MP');
 
 // Initialize the map centered on the area
 const map = L.map('map').setView([40.25, -75.05], 8);
@@ -109,10 +113,14 @@ function addMarkers() {
     // Add new markers
     ALL.forEach((p, i) => {
         const m = L.marker([p.lat, p.lng], { icon: icon(p) }).addTo(map).bindPopup(popup(p));
-        // When marker is clicked, set it as start point in dropdown and radius center
+        // When marker is clicked, select it for radius and route appropriately
         m.on('click', () => {
-            document.getElementById('from').value = i;
             document.getElementById('radiusCenter').value = i;
+            if (p.type === 'MP') {
+                document.getElementById('from').value = i;
+            } else {
+                document.getElementById('to').value = i;
+            }
         });
         markers.push(m);
     });
@@ -123,19 +131,40 @@ function addMarkers() {
 
 // Function to populate select dropdowns with locations
 function fillSelects() {
-    ['from', 'to', 'radiusCenter'].forEach(id => {
-        const sel = document.getElementById(id);
-        sel.innerHTML = '';
-        ALL.forEach((p, i) => {
-            const o = document.createElement('option');
-            o.value = i;
-            o.textContent = `${p.type} - ${p.id || p.name}`;
-            sel.appendChild(o);
-        });
+    const fromSelect = document.getElementById('from');
+    const toSelect = document.getElementById('to');
+    const radiusSelect = document.getElementById('radiusCenter');
+
+    fromSelect.innerHTML = '';
+    ALL_MP.forEach((p, i) => {
+        const option = document.createElement('option');
+        const globalIndex = ALL.indexOf(p);
+        option.value = globalIndex;
+        option.textContent = `${p.type} - ${p.id}`;
+        fromSelect.appendChild(option);
+    });
+
+    toSelect.innerHTML = '';
+    ALL_BWW.forEach((p, i) => {
+        const option = document.createElement('option');
+        const globalIndex = ALL.indexOf(p);
+        option.value = globalIndex;
+        option.textContent = `${p.type} - ${p.name}`;
+        toSelect.appendChild(option);
+    });
+
+    radiusSelect.innerHTML = '';
+    ALL.forEach((p, i) => {
+        const option = document.createElement('option');
+        option.value = i;
+        option.textContent = `${p.type} - ${p.id || p.name}`;
+        radiusSelect.appendChild(option);
     });
 
     // Default end point to first BWW
-    document.getElementById('to').value = MP.length;
+    if (ALL_BWW.length > 0) {
+        document.getElementById('to').value = ALL.indexOf(ALL_BWW[0]);
+    }
 
     // Update pin counts display
     document.getElementById('counts').innerHTML = `${MP.length} MP pins<br>${BWW_PA.length} PA BWW pins<br>${BWW_NJ.length} NJ BWW pins`;
