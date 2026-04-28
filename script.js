@@ -232,7 +232,7 @@ function haversine(a, b) {
 // Function to geocode a single user address using Nominatim
 async function geocodeAddress(address) {
     const q = encodeURIComponent(address);
-    const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${q}`;
+    const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${q}&countrycodes=US`;
     const r = await fetch(url, { headers: { 'Accept': 'application/json' } });
     const d = await r.json();
     if (d && d[0]) {
@@ -327,7 +327,7 @@ async function routeDrive() {
 // Function to geocode a single address using Nominatim
 async function geocodeOne(p) {
     const q = encodeURIComponent(p.address);
-    const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${q}`;
+    const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${q}&countrycodes=US`;
     const r = await fetch(url, { headers: { 'Accept': 'application/json' } });
     const d = await r.json();
     if (d && d[0]) {
@@ -362,7 +362,7 @@ addMarkers();
 fillSelects();
 
 // Autocomplete for address input
-const geocoder = L.Control.Geocoder.nominatim();
+const geocoder = L.Control.Geocoder.nominatim({ geocodingQueryParams: { countrycodes: 'US' } });
 const startAddressInput = document.getElementById('startAddress');
 const suggestionsDiv = document.getElementById('addressSuggestions');
 let debounceTimer;
