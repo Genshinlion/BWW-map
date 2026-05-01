@@ -1,31 +1,31 @@
 // Data arrays for locations
 const MP = [
-    {"id": "MP 90574", "lat": 40.2541957149049, "lng": -75.0880001725863},
-    {"id": "MP 20723", "lat": 40.0080063085635, "lng": -75.1727176372791},
-    {"id": "MP 20724", "lat": 39.9145452021085, "lng": -75.1554917030765},
-    {"id": "MP 20673", "lat": 39.9951025705013, "lng": -75.0931737784802},
-    {"id": "MP 20678", "lat": 40.0740141116265, "lng": -75.1575861121568},
-    {"id": "MP 90577", "lat": 40.0873896110275, "lng": -74.9608339748005},
-    {"id": "MP 91122", "lat": 40.2129635176821, "lng": -75.01195462589},
-    {"id": "MP 94750", "lat": 39.9763606531953, "lng": -75.1194692650701},
-    {"id": "MP 20693", "lat": 39.976494932146,  "lng": -75.1580816265739},
-    {"id": "MP 90582", "lat": 40.2322636001077, "lng": -74.9407894586644},
-    {"id": "MP 21521", "lat": 39.9539052600824, "lng": -75.199227479263},
-    {"id": "MP 21518", "lat": 39.9379431591009, "lng": -75.1667540382082},
-    {"id": "MP 21520", "lat": 39.9186826142142, "lng": -75.1849716018374},
-    {"id": "MP 20674", "lat": 40.0306914380818, "lng": -75.1034135383946},
-    {"id": "MP 95024", "lat": 40.2459747070055, "lng": -74.7630541149707},
-    {"id": "MP 20682", "lat": 40.2110783778632, "lng": -74.7552723000323},
-    {"id": "MP 20697", "lat": 40.556294071305,  "lng": -75.4896127978639},
-    {"id": "MP 90560", "lat": 40.6748387513354, "lng": -75.3460137037353},
-    {"id": "MP 21406", "lat": 40.5524942874463, "lng": -75.5923687183309},
-    {"id": "MP 90522", "lat": 41.2584381158992, "lng": -75.901857032505},
-    {"id": "MP 90566", "lat": 40.2393244476958, "lng": -75.242141743823},
-    {"id": "MP 90570", "lat": 40.6788561788995, "lng": -75.1473909672058},
-    {"id": "MP 91116", "lat": 40.6443483776485, "lng": -75.3470388503772},
-    {"id": "MP 91118", "lat": 40.2647605615097, "lng": -75.3192244305822},
-    {"id": "MP 94747", "lat": 40.3177636918695, "lng": -75.3076553069029},
-    {"id": "MP 91120", "lat": 40.1165378059024, "lng": -75.2864770740739}
+    {"id": "MP 90574", "lat": 40.2541957149049, "lng": -75.0880001725863, "radiusMiles": 1},
+    {"id": "MP 20723", "lat": 40.0080063085635, "lng": -75.1727176372791, "radiusMiles": 1},
+    {"id": "MP 20724", "lat": 39.9145452021085, "lng": -75.1554917030765, "radiusMiles": 0.5},
+    {"id": "MP 20673", "lat": 39.9951025705013, "lng": -75.0931737784802, "radiusMiles": 1},
+    {"id": "MP 20678", "lat": 40.0740141116265, "lng": -75.1575861121568, "radiusMiles": 1.5},
+    {"id": "MP 90577", "lat": 40.0873896110275, "lng": -74.9608339748005, "radiusMiles": 1},
+    {"id": "MP 91122", "lat": 40.2129635176821, "lng": -75.01195462589, "radiusMiles": 1},
+    {"id": "MP 94750", "lat": 39.9763606531953, "lng": -75.1194692650701, "radiusMiles": 0.5},
+    {"id": "MP 20693", "lat": 39.976494932146,  "lng": -75.1580816265739, "radiusMiles": 0.5},
+    {"id": "MP 90582", "lat": 40.2322636001077, "lng": -74.9407894586644, "radiusMiles": 1},
+    {"id": "MP 21521", "lat": 39.9539052600824, "lng": -75.199227479263, "radiusMiles": 0.5},
+    {"id": "MP 21518", "lat": 39.9379431591009, "lng": -75.1667540382082, "radiusMiles": 0.5},
+    {"id": "MP 21520", "lat": 39.9186826142142, "lng": -75.1849716018374, "radiusMiles": 0.5},
+    {"id": "MP 20674", "lat": 40.0306914380818, "lng": -75.1034135383946, "radiusMiles": 1},
+    {"id": "MP 95024", "lat": 40.2459747070055, "lng": -74.7630541149707, "radiusMiles": 0.75},
+    {"id": "MP 20682", "lat": 40.2110783778632, "lng": -74.7552723000323, "radiusMiles": 1.5},
+    {"id": "MP 20697", "lat": 40.556294071305,  "lng": -75.4896127978639, "radiusMiles": 1},
+    {"id": "MP 90560", "lat": 40.6748387513354, "lng": -75.3460137037353, "radiusMiles": 1},
+    {"id": "MP 21406", "lat": 40.5524942874463, "lng": -75.5923687183309, "radiusMiles": 1},
+    {"id": "MP 90522", "lat": 41.2584381158992, "lng": -75.901857032505, "radiusMiles": 1},
+    {"id": "MP 90566", "lat": 40.2393244476958, "lng": -75.242141743823, "radiusMiles": 1},
+    {"id": "MP 90570", "lat": 40.6788561788995, "lng": -75.1473909672058, "radiusMiles": 1},
+    {"id": "MP 91116", "lat": 40.6443483776485, "lng": -75.3470388503772, "radiusMiles": 1},
+    {"id": "MP 91118", "lat": 40.2647605615097, "lng": -75.3192244305822, "radiusMiles": 1},
+    {"id": "MP 94747", "lat": 40.3177636918695, "lng": -75.3076553069029, "radiusMiles": 1},
+    {"id": "MP 91120", "lat": 40.1165378059024, "lng": -75.2864770740739, "radiusMiles": 1}
 ];
 
 const BWW_PA = [
@@ -75,6 +75,10 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 // Array to hold markers
 const markers = [];
+const pinnedAddressMarkers = [];
+const pinnedAddressCircles = [];
+let pinnedAddresses = [];
+const PINNED_ADDRESSES_KEY = 'bwwMapPinnedAddresses';
 
 // Function to create a custom icon for markers
 function icon(p) {
@@ -97,11 +101,39 @@ function icon(p) {
     });
 }
 
+function pinnedAddressIcon() {
+    return L.divIcon({
+        className: '',
+        html: '<i class="fas fa-map-pin" style="color: #16a34a; font-size: 24px;"></i>',
+        iconSize: [24, 24],
+        iconAnchor: [12, 24]
+    });
+}
+
+function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, char => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+    }[char]));
+}
+
+function formatMiles(miles) {
+    const value = Number.isFinite(miles) ? miles : 0;
+    return `${value} ${value === 1 ? 'mile' : 'miles'}`;
+}
+
 // Function removed - no longer needed with new icon system
 
 // Function to generate popup content for a location
 function popup(p) {
-    return `<b>${p.id || p.name}</b><br>${p.type}<br>${p.address || ''}<br>${p.lat.toFixed(6)}, ${p.lng.toFixed(6)}`;
+    const radiusLine = p.type === 'MP' && Number.isFinite(p.radiusMiles)
+        ? `<br>${p.radiusMiles} ${p.radiusMiles === 1 ? 'mile' : 'miles'} radius`
+        : '';
+
+    return `<b>${p.id || p.name}</b><br>${p.type}${radiusLine}<br>${p.address || ''}<br>${p.lat.toFixed(6)}, ${p.lng.toFixed(6)}`;
 }
 
 // Function to add markers to the map
@@ -115,8 +147,9 @@ function addMarkers() {
         const m = L.marker([p.lat, p.lng], { icon: icon(p) }).addTo(map).bindPopup(popup(p));
         // When marker is clicked, select it for radius and route appropriately
         m.on('click', () => {
-            document.getElementById('radiusCenter').value = i;
             if (p.type === 'MP') {
+                document.getElementById('radiusCenter').value = i;
+                updateRadiusMilesInput();
                 document.getElementById('from').value = i;
             } else {
                 document.getElementById('to').value = i;
@@ -163,12 +196,15 @@ function fillSelects() {
     });
 
     radiusSelect.innerHTML = '';
-    ALL.forEach((p, i) => {
+    ALL_MP.forEach(p => {
         const option = document.createElement('option');
-        option.value = i;
-        option.textContent = `${p.type} - ${p.id || p.name}`;
+        const globalIndex = ALL.indexOf(p);
+        option.value = globalIndex;
+        option.textContent = `${p.type} - ${p.id} (${p.radiusMiles} mi radius)`;
         radiusSelect.appendChild(option);
     });
+
+    updateRadiusMilesInput();
 
     // Default end point to first BWW
     if (ALL_BWW.length > 0) {
@@ -179,14 +215,62 @@ function fillSelects() {
     document.getElementById('counts').innerHTML = `${MP.length} MP pins<br>${BWW_PA.length} PA BWW pins<br>${BWW_NJ.length} NJ BWW pins`;
 }
 
-// Variables for radius circle and route line
+// Variables for radius circles and route line
+const mpRadiusCircles = [];
 let radiusCircle = null, routeLine = null;
+
+function getSelectedRadiusCenter() {
+    return ALL[+document.getElementById('radiusCenter').value];
+}
+
+function getSelectedRadiusMiles() {
+    const p = getSelectedRadiusCenter();
+    if (p && p.type === 'MP' && Number.isFinite(p.radiusMiles)) {
+        return p.radiusMiles;
+    }
+    return parseFloat(document.getElementById('radiusMiles').value) || 0;
+}
+
+function updateRadiusMilesInput() {
+    const radiusMilesInput = document.getElementById('radiusMiles');
+    const p = getSelectedRadiusCenter();
+
+    if (p && p.type === 'MP' && Number.isFinite(p.radiusMiles)) {
+        radiusMilesInput.value = p.radiusMiles;
+        radiusMilesInput.readOnly = true;
+        radiusMilesInput.title = `${p.id} has a fixed PDF radius of ${p.radiusMiles} miles.`;
+    } else {
+        radiusMilesInput.readOnly = false;
+        radiusMilesInput.title = '';
+    }
+}
+
+function drawAllMPRadii() {
+    mpRadiusCircles.forEach(circle => map.removeLayer(circle));
+    mpRadiusCircles.length = 0;
+
+    ALL_MP.forEach(p => {
+        if (!Number.isFinite(p.radiusMiles)) return;
+
+        const circle = L.circle([p.lat, p.lng], {
+            radius: p.radiusMiles * 1609.344,
+            color: '#1e3a8a',
+            fillColor: '#60a5fa',
+            fillOpacity: 0.08,
+            weight: 1.5
+        }).addTo(map);
+
+        circle.bindPopup(`<b>${p.id}</b><br>Fixed territory radius: ${p.radiusMiles} miles`);
+        mpRadiusCircles.push(circle);
+    });
+}
 
 // Function to draw radius circle around selected center
 function drawRadius() {
     clearRadius();
-    const p = ALL[+document.getElementById('radiusCenter').value];
-    const miles = parseFloat(document.getElementById('radiusMiles').value) || 0;
+    const p = getSelectedRadiusCenter();
+    const miles = getSelectedRadiusMiles();
+    document.getElementById('radiusMiles').value = miles;
     radiusCircle = L.circle([p.lat, p.lng], {
         radius: miles * 1609.344, // Convert miles to meters
         color: '#111827',
@@ -232,13 +316,124 @@ function haversine(a, b) {
 // Function to geocode a single user address using Nominatim
 async function geocodeAddress(address) {
     const q = encodeURIComponent(address);
-    const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${q}&countrycodes=US`;
+    const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${q}&countrycodes=US&viewbox=-80.8,42.7,-73.6,38.5`;
     const r = await fetch(url, { headers: { 'Accept': 'application/json' } });
     const d = await r.json();
     if (d && d[0]) {
         return { lat: parseFloat(d[0].lat), lng: parseFloat(d[0].lon) };
     }
     return null;
+}
+
+function savePinnedAddresses() {
+    localStorage.setItem(PINNED_ADDRESSES_KEY, JSON.stringify(pinnedAddresses));
+}
+
+function loadPinnedAddresses() {
+    try {
+        pinnedAddresses = JSON.parse(localStorage.getItem(PINNED_ADDRESSES_KEY)) || [];
+    } catch (e) {
+        pinnedAddresses = [];
+    }
+    pinnedAddresses = pinnedAddresses.map(pin => ({
+        ...pin,
+        radiusMiles: Number.isFinite(pin.radiusMiles) ? pin.radiusMiles : 0
+    }));
+    renderPinnedAddresses();
+}
+
+function renderPinnedAddresses() {
+    pinnedAddressMarkers.forEach(marker => map.removeLayer(marker));
+    pinnedAddressMarkers.length = 0;
+    pinnedAddressCircles.forEach(circle => map.removeLayer(circle));
+    pinnedAddressCircles.length = 0;
+
+    const list = document.getElementById('pinnedAddressesList');
+    if (!list) return;
+
+    if (pinnedAddresses.length === 0) {
+        list.textContent = 'No pinned addresses yet.';
+    } else {
+        list.innerHTML = pinnedAddresses.map(pin => `
+            <div class="pinned-address-item">
+                <div class="pinned-address-text">
+                    ${escapeHtml(pin.address)}<br>
+                    ${formatMiles(pin.radiusMiles)} radius
+                </div>
+                <button class="pinned-address-remove" onclick="removePinnedAddress('${pin.id}')">Remove</button>
+            </div>
+        `).join('');
+    }
+
+    pinnedAddresses.forEach(pin => {
+        if (Number.isFinite(pin.radiusMiles) && pin.radiusMiles > 0) {
+            const circle = L.circle([pin.lat, pin.lng], {
+                radius: pin.radiusMiles * 1609.344,
+                color: '#16a34a',
+                fillColor: '#86efac',
+                fillOpacity: 0.1,
+                weight: 1.5
+            }).addTo(map);
+            pinnedAddressCircles.push(circle);
+        }
+
+        const marker = L.marker([pin.lat, pin.lng], { icon: pinnedAddressIcon() }).addTo(map);
+        marker.bindPopup(`
+            <b>Pinned address</b><br>
+            ${escapeHtml(pin.address)}<br>
+            ${formatMiles(pin.radiusMiles)} radius<br>
+            ${pin.lat.toFixed(6)}, ${pin.lng.toFixed(6)}<br>
+            <button class="popup-remove-pin" onclick="removePinnedAddress('${pin.id}')">Remove pin</button>
+        `);
+        pinnedAddressMarkers.push(marker);
+    });
+}
+
+async function pinAddress() {
+    const addressInput = document.getElementById('pinnedAddress');
+    const radiusInput = document.getElementById('pinnedAddressRadius');
+    const out = document.getElementById('addressRouteResult');
+    const address = addressInput.value.trim();
+    const radiusMiles = parseFloat(radiusInput.value);
+
+    if (!address) {
+        out.textContent = 'Please enter an address to pin in the Pin address section.';
+        return;
+    }
+
+    if (!Number.isFinite(radiusMiles) || radiusMiles < 0) {
+        out.textContent = 'Please enter a valid radius of 0 miles or more.';
+        return;
+    }
+
+    out.textContent = 'Geocoding address for pin...';
+    const point = await geocodeAddress(address);
+    if (!point) {
+        out.textContent = 'Address not found. Please try a different address.';
+        return;
+    }
+
+    const pin = {
+        id: `pin-${Date.now()}-${Math.round(Math.random() * 100000)}`,
+        address,
+        radiusMiles,
+        lat: point.lat,
+        lng: point.lng
+    };
+
+    pinnedAddresses.push(pin);
+    savePinnedAddresses();
+    renderPinnedAddresses();
+    map.setView([pin.lat, pin.lng], Math.max(map.getZoom(), 14));
+    pinnedAddressMarkers[pinnedAddressMarkers.length - 1]?.openPopup();
+    addressInput.value = '';
+    out.innerHTML = `<b>Pinned:</b> ${escapeHtml(address)}<br><b>Radius:</b> ${formatMiles(radiusMiles)}`;
+}
+
+function removePinnedAddress(id) {
+    pinnedAddresses = pinnedAddresses.filter(pin => pin.id !== id);
+    savePinnedAddresses();
+    renderPinnedAddresses();
 }
 
 // Route from a typed address to a selected location
@@ -360,50 +555,74 @@ async function geocodeBWW() {
 // Initialize the map with markers and selects
 addMarkers();
 fillSelects();
+drawAllMPRadii();
+loadPinnedAddresses();
 
-// Autocomplete for address input
-const geocoder = L.Control.Geocoder.nominatim({ geocodingQueryParams: { countrycodes: 'US' } });
-const startAddressInput = document.getElementById('startAddress');
-const suggestionsDiv = document.getElementById('addressSuggestions');
-let debounceTimer;
+document.getElementById('radiusCenter').addEventListener('change', updateRadiusMilesInput);
+document.getElementById('radiusCenter').addEventListener('change', () => {
+    const selectedIndex = +document.getElementById('radiusCenter').value;
+    const p = ALL[selectedIndex];
+    if (!p) return;
 
-startAddressInput.addEventListener('input', function() {
-    clearTimeout(debounceTimer);
-    const query = this.value.trim();
-    if (query.length < 3) {
-        suggestionsDiv.style.display = 'none';
-        return;
-    }
-    debounceTimer = setTimeout(() => {
-        geocoder.geocode(query, (results) => {
-            suggestionsDiv.innerHTML = '';
-            if (results && results.length > 0) {
-                results.slice(0, 5).forEach((result) => {
-                    const div = document.createElement('div');
-                    div.textContent = result.name;
-                    div.addEventListener('click', () => {
-                        startAddressInput.value = result.name;
-                        suggestionsDiv.style.display = 'none';
+    map.setView([p.lat, p.lng], Math.max(map.getZoom(), 13));
+    markers[selectedIndex]?.openPopup();
+});
+
+// Autocomplete for address inputs, biased toward PA/NJ while staying inside the US.
+const addressSearchParams = {
+    countrycodes: 'US',
+    viewbox: '-80.8,42.7,-73.6,38.5'
+};
+const geocoder = L.Control.Geocoder.nominatim({ geocodingQueryParams: addressSearchParams });
+
+function setupAddressAutocomplete(inputId, suggestionsId) {
+    const input = document.getElementById(inputId);
+    const suggestions = document.getElementById(suggestionsId);
+    let debounceTimer;
+
+    if (!input || !suggestions) return;
+
+    input.addEventListener('input', function() {
+        clearTimeout(debounceTimer);
+        const query = this.value.trim();
+        if (query.length < 3) {
+            suggestions.style.display = 'none';
+            return;
+        }
+
+        debounceTimer = setTimeout(() => {
+            geocoder.geocode(query, (results) => {
+                suggestions.innerHTML = '';
+                if (results && results.length > 0) {
+                    results.slice(0, 6).forEach((result) => {
+                        const div = document.createElement('div');
+                        div.textContent = result.name;
+                        div.addEventListener('click', () => {
+                            input.value = result.name;
+                            suggestions.style.display = 'none';
+                        });
+                        suggestions.appendChild(div);
                     });
-                    suggestionsDiv.appendChild(div);
-                });
-                suggestionsDiv.style.display = 'block';
-            } else {
-                suggestionsDiv.style.display = 'none';
-            }
-        });
-    }, 300);
-});
+                    suggestions.style.display = 'block';
+                } else {
+                    suggestions.style.display = 'none';
+                }
+            });
+        }, 250);
+    });
 
-startAddressInput.addEventListener('blur', () => {
-    // Delay hiding to allow click on suggestion
-    setTimeout(() => {
-        suggestionsDiv.style.display = 'none';
-    }, 150);
-});
+    input.addEventListener('blur', () => {
+        setTimeout(() => {
+            suggestions.style.display = 'none';
+        }, 150);
+    });
 
-startAddressInput.addEventListener('focus', function() {
-    if (this.value.trim().length >= 3 && suggestionsDiv.children.length > 0) {
-        suggestionsDiv.style.display = 'block';
-    }
-});
+    input.addEventListener('focus', function() {
+        if (this.value.trim().length >= 3 && suggestions.children.length > 0) {
+            suggestions.style.display = 'block';
+        }
+    });
+}
+
+setupAddressAutocomplete('startAddress', 'addressSuggestions');
+setupAddressAutocomplete('pinnedAddress', 'pinnedAddressSuggestions');
