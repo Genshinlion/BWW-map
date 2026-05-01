@@ -167,6 +167,7 @@ function fillSelects() {
     const fromSelect = document.getElementById('from');
     const toSelect = document.getElementById('to');
     const radiusSelect = document.getElementById('radiusCenter');
+    const locationSearch = document.getElementById('locationSearch');
 
     fromSelect.innerHTML = '';
     ALL_MP.forEach((p, i) => {
@@ -204,7 +205,18 @@ function fillSelects() {
         radiusSelect.appendChild(option);
     });
 
+    if (locationSearch) {
+        locationSearch.innerHTML = '';
+        ALL.forEach((p, i) => {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = `${p.type} - ${p.id || p.name}`;
+            locationSearch.appendChild(option);
+        });
+    }
+
     updateRadiusMilesInput();
+    updateMPSummary();
 
     // Default end point to first BWW
     if (ALL_BWW.length > 0) {
@@ -243,6 +255,55 @@ function updateRadiusMilesInput() {
         radiusMilesInput.readOnly = false;
         radiusMilesInput.title = '';
     }
+}
+
+function getNearest(items, point) {
+    return items
+        .map(item => ({ ...item, distance: haversine(point, item) }))
+        .sort((a, b) => a.distance - b.distance)[0];
+}
+
+function updateMPSummary() {
+    const out = document.getElementById('mpSummary');
+    const mp = getSelectedRadiusCenter();
+    if (!out || !mp || mp.type !== 'MP') return;
+
+    const nearestBWW = getNearest(ALL_BWW, mp);
+    const inRadius = ALL_BWW.filter(bww => haversine(mp, bww) <= mp.radiusMiles);
+
+    out.innerHTML = `
+        <b>${mp.id}</b><br>
+        <b>Radius:</b> ${formatMiles(mp.radiusMiles)}<br>
+        <b>BWW inside radius:</b> ${inRadius.length}<br>
+        <b>Nearest BWW:</b> ${nearestBWW.name} (${nearestBWW.distance.toFixed(2)} mi)
+    `;
+}
+
+function jumpToLocation() {
+    const index = +document.getElementById('locationSearch').value;
+    const p = ALL[index];
+    if (!p) return;
+
+    map.setView([p.lat, p.lng], Math.max(map.getZoom(), 13));
+    markers[index]?.openPopup();
+
+    if (p.type === 'MP') {
+        document.getElementById('radiusCenter').value = index;
+        updateRadiusMilesInput();
+        updateMPSummary();
+    }
+}
+
+function togglePresentationView() {
+    document.body.classList.toggle('presentation-mode');
+    const enabled = document.body.classList.contains('presentation-mode');
+    const button = document.getElementById('presentationToggle');
+    if (button) {
+        button.innerHTML = enabled
+            ? '<i class="fas fa-compress"></i> Exit Presentation'
+            : '<i class="fas fa-expand"></i> Presentation View';
+    }
+    setTimeout(() => map.invalidateSize(), 250);
 }
 
 function drawAllMPRadii() {
@@ -337,6 +398,7 @@ function loadPinnedAddresses() {
     }
     pinnedAddresses = pinnedAddresses.map(pin => ({
         ...pin,
+        note: pin.note || '',
         radiusMiles: Number.isFinite(pin.radiusMiles) ? pin.radiusMiles : 0
     }));
     renderPinnedAddresses();
@@ -357,6 +419,7 @@ function renderPinnedAddresses() {
         list.innerHTML = pinnedAddresses.map(pin => `
             <div class="pinned-address-item">
                 <div class="pinned-address-text">
+                    ${pin.note ? `<b>${escapeHtml(pin.note)}</b><br>` : ''}
                     ${escapeHtml(pin.address)}<br>
                     ${formatMiles(pin.radiusMiles)} radius
                 </div>
@@ -380,6 +443,7 @@ function renderPinnedAddresses() {
         const marker = L.marker([pin.lat, pin.lng], { icon: pinnedAddressIcon() }).addTo(map);
         marker.bindPopup(`
             <b>Pinned address</b><br>
+            ${pin.note ? `${escapeHtml(pin.note)}<br>` : ''}
             ${escapeHtml(pin.address)}<br>
             ${formatMiles(pin.radiusMiles)} radius<br>
             ${pin.lat.toFixed(6)}, ${pin.lng.toFixed(6)}<br>
@@ -391,9 +455,11 @@ function renderPinnedAddresses() {
 
 async function pinAddress() {
     const addressInput = document.getElementById('pinnedAddress');
+    const noteInput = document.getElementById('pinnedAddressNote');
     const radiusInput = document.getElementById('pinnedAddressRadius');
     const out = document.getElementById('addressRouteResult');
     const address = addressInput.value.trim();
+    const note = noteInput.value.trim();
     const radiusMiles = parseFloat(radiusInput.value);
 
     if (!address) {
@@ -416,6 +482,7 @@ async function pinAddress() {
     const pin = {
         id: `pin-${Date.now()}-${Math.round(Math.random() * 100000)}`,
         address,
+        note,
         radiusMiles,
         lat: point.lat,
         lng: point.lng
@@ -427,6 +494,7 @@ async function pinAddress() {
     map.setView([pin.lat, pin.lng], Math.max(map.getZoom(), 14));
     pinnedAddressMarkers[pinnedAddressMarkers.length - 1]?.openPopup();
     addressInput.value = '';
+    noteInput.value = '';
     out.innerHTML = `<b>Pinned:</b> ${escapeHtml(address)}<br><b>Radius:</b> ${formatMiles(radiusMiles)}`;
 }
 
@@ -434,6 +502,34 @@ function removePinnedAddress(id) {
     pinnedAddresses = pinnedAddresses.filter(pin => pin.id !== id);
     savePinnedAddresses();
     renderPinnedAddresses();
+}
+
+async function findNearestLocations() {
+    const address = document.getElementById('closestAddress').value.trim();
+    const out = document.getElementById('closestMPResult');
+
+    if (!address) {
+        out.textContent = 'Please enter an address to check.';
+        return;
+    }
+
+    out.textContent = 'Geocoding address...';
+    const point = await geocodeAddress(address);
+    if (!point) {
+        out.textContent = 'Address not found. Please try a different address.';
+        return;
+    }
+
+    const closestMP = getNearest(ALL_MP, point);
+    const closestBWW = getNearest(ALL_BWW, point);
+    const insideRadius = closestMP.distance <= closestMP.radiusMiles;
+
+    out.innerHTML = `
+        <b>Closest MP:</b> ${closestMP.id} (${closestMP.distance.toFixed(2)} mi)<br>
+        <b>Closest BWW:</b> ${closestBWW.name} (${closestBWW.distance.toFixed(2)} mi)<br>
+        <b>Inside closest MP radius:</b> ${insideRadius ? 'Yes' : 'No'}<br>
+        <span class="result-muted">${closestMP.id} radius is ${formatMiles(closestMP.radiusMiles)}.</span>
+    `;
 }
 
 // Route from a typed address to a selected location
@@ -559,6 +655,7 @@ drawAllMPRadii();
 loadPinnedAddresses();
 
 document.getElementById('radiusCenter').addEventListener('change', updateRadiusMilesInput);
+document.getElementById('radiusCenter').addEventListener('change', updateMPSummary);
 document.getElementById('radiusCenter').addEventListener('change', () => {
     const selectedIndex = +document.getElementById('radiusCenter').value;
     const p = ALL[selectedIndex];
@@ -625,4 +722,5 @@ function setupAddressAutocomplete(inputId, suggestionsId) {
 }
 
 setupAddressAutocomplete('startAddress', 'addressSuggestions');
+setupAddressAutocomplete('closestAddress', 'closestAddressSuggestions');
 setupAddressAutocomplete('pinnedAddress', 'pinnedAddressSuggestions');
