@@ -147,9 +147,15 @@ function addMarkers() {
         const m = L.marker([p.lat, p.lng], { icon: icon(p) }).addTo(map).bindPopup(popup(p));
         // When marker is clicked, select it for radius and route appropriately
         m.on('click', () => {
+            const locationSearch = document.getElementById('locationSearch');
+            if (locationSearch) {
+                locationSearch.value = i;
+            }
+
             if (p.type === 'MP') {
                 document.getElementById('radiusCenter').value = i;
                 updateRadiusMilesInput();
+                updateMPSummary();
                 document.getElementById('from').value = i;
             } else {
                 document.getElementById('to').value = i;

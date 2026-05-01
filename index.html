@@ -13,26 +13,22 @@
     <script src="https://unpkg.com/leaflet-control-geocoder@2.4.0/dist/Control.Geocoder.js"></script>
 </head>
 <body>
-    <header id="top">
-        <div class="brand">
-            <div>
-                <p class="eyebrow">Development Territory</p>
-                <h1>MP + Buffalo Wild Wings Map</h1>
-            </div>
-            <div class="top-legend" aria-label="Map legend summary">
-                <span><i class="fas fa-building" style="color:#2d58cf"></i> MP</span>
-                <span><i class="fas fa-utensils" style="color:#dc2626"></i> PA BWW</span>
-                <span><i class="fas fa-utensils" style="color:#c2410c"></i> NJ BWW</span>
-                <span><i class="fas fa-star" style="color:#c2410c"></i> GO</span>
-                <span><i class="fas fa-map-pin" style="color:#16a34a"></i> Pinned</span>
-                <span><i class="fas fa-circle" style="color:#1e3a8a"></i> MP radius</span>
-                <span><i class="fas fa-circle" style="color:#16a34a"></i> Pin radius</span>
-            </div>
-        </div>
-    </header>
-
     <main id="wrap">
         <aside id="panel" aria-label="Map tools">
+            <section class="side-brand">
+                <p class="eyebrow">Development Territory</p>
+                <h1>MP + Buffalo Wild Wings Map</h1>
+                <div class="top-legend" aria-label="Map legend summary">
+                    <span><i class="fas fa-building" style="color:#2d58cf"></i> MP</span>
+                    <span><i class="fas fa-utensils" style="color:#dc2626"></i> PA BWW</span>
+                    <span><i class="fas fa-utensils" style="color:#c2410c"></i> NJ BWW</span>
+                    <span><i class="fas fa-star" style="color:#c2410c"></i> GO</span>
+                    <span><i class="fas fa-map-pin" style="color:#16a34a"></i> Pinned</span>
+                    <span><i class="fas fa-circle" style="color:#1e3a8a"></i> MP radius</span>
+                    <span><i class="fas fa-circle" style="color:#16a34a"></i> Pin radius</span>
+                </div>
+            </section>
+
             <section class="row">
                 <div class="section-title"><i class="fas fa-display"></i><b>Presentation</b></div>
                 <button class="secondary" id="presentationToggle" onclick="togglePresentationView()"><i class="fas fa-expand"></i> Presentation View</button>
