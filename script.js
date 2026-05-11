@@ -48,16 +48,23 @@ function normalizeLocationData(data) {
 }
 
 async function loadLocationData() {
+    // Try Supabase via Netlify function
+    try {
+        const res = await fetch('/.netlify/functions/locations');
+        if (res.ok) {
+            normalizeLocationData(await res.json());
+            return true;
+        }
+    } catch {}
+
+    // Fallback: static files
     if (window.PCG_LOCATION_DATA) {
         normalizeLocationData(window.PCG_LOCATION_DATA);
         return true;
     }
 
     const response = await fetch('data.json', { cache: 'no-store' });
-    if (!response.ok) {
-        throw new Error('Unable to load location data.');
-    }
-
+    if (!response.ok) throw new Error('Unable to load location data.');
     normalizeLocationData(await response.json());
     return true;
 }
@@ -120,11 +127,31 @@ function setupAccessPrompt() {
     const form = document.getElementById('accessForm');
     const input = document.getElementById('accessToken');
     const message = document.getElementById('accessMessage');
+    const submitBtn = form?.querySelector('button[type="submit"]');
 
     input?.focus();
-    form?.addEventListener('submit', (event) => {
+    form?.addEventListener('submit', async (event) => {
         event.preventDefault();
-        const success = (input?.value || '').trim() === ACCESS_TOKEN;
+        const token = (input?.value || '').trim();
+        if (!token) return;
+
+        if (submitBtn) submitBtn.disabled = true;
+        if (message) message.textContent = '';
+
+        let success = false;
+        try {
+            const res = await fetch('/.netlify/functions/verify-token', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ token }),
+            });
+            const data = await res.json();
+            success = data.success === true;
+        } catch {
+            // If function is unreachable, fall back to local check
+            success = token === ACCESS_TOKEN;
+        }
+
         logAccessAttempt(success);
 
         if (success) {
@@ -132,9 +159,8 @@ function setupAccessPrompt() {
             return;
         }
 
-        if (message) {
-            message.textContent = 'Invalid access code.';
-        }
+        if (submitBtn) submitBtn.disabled = false;
+        if (message) message.textContent = 'Invalid access code.';
         input?.select();
     });
 }
